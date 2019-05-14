@@ -24,6 +24,7 @@ https://leetcode-cn.com/problems/move-zeroes/
 
 void moveZeroes(int* nums, int numsSize) {
     int cnt = 0;
+    // 如果当前索引的值是0，则将后面的数据往前移动，在最后面补0
     for(size_t i = 0; i < numsSize-cnt; )
     {
         if(nums[i] == 0 )
@@ -44,8 +45,8 @@ void moveZeroes(int* nums, int numsSize) {
 
 int main()
 {
-    // int nums[] = {0,11,0,3};
-    int nums[] = {0,0};
+    int nums[] = {0,11,3};
+    // int nums[] = {0,0};
     // int nums[] = {1,0};
     // int nums[] = {1,0,1};
     moveZeroes(nums, sizeof(nums)/sizeof(int));
