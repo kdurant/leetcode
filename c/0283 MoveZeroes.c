@@ -43,6 +43,31 @@ void moveZeroes(int* nums, int numsSize) {
     }
 }
 
+/*
+双指针
+i遍历数组，j用作不为0的数的索引
+如果当前变力的数不是0，将现在的数放到索引j的位置
+
+没有遇到0之前，nums[i]和nums[j]的交换没有意义
+遇到0之后，i继续向后移动，j保持不变
+遇到下一个不为0的数后，交换这两个数
+
+*/
+void moveZeroes1(int* nums, int numsSize) {
+    int j = 0;
+    int temp;
+    for (size_t i = 0; i < numsSize; i++)
+    {
+        if(nums[i] != 0)    // 
+        {
+            temp = nums[i];
+            nums[i] = nums[j];
+            nums[j] = temp;
+            j++;
+        }
+    }
+}
+
 int main()
 {
     int nums[] = {0,11,3};
