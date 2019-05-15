@@ -14,7 +14,7 @@ https://leetcode-cn.com/problems/reverse-string/
 
 #include<limits.h>
 
-void reverseString(char* s, int sSize) {
+void reverseString1(char* s, int sSize) {
     char *n = (char *)malloc(sizeof(char)*sSize);
     for(size_t i = sSize; i > 0; i--)
     {
@@ -23,6 +23,20 @@ void reverseString(char* s, int sSize) {
   
     memcpy(s, n , sSize);
     free(n);
+}
+
+void reverseString2(char* s, int sSize) {
+    int i = 0;
+    int j = sSize-1;
+    int tmp;
+    while(i < j)
+    {
+        tmp = s[i];
+        s[i] = s[j];
+        s[j] = tmp;
+        i++;
+        j--;
+    }
 }
 
 int main()
