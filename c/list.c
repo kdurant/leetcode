@@ -204,25 +204,45 @@ struct ListNode* mergeTwoLists(struct ListNode* l1, struct ListNode* l2){
         head->next = l1;
     return result;
 }
+
 /**
- * @brief 反转一个单链表。
- * 输入: 1->2->3->4->5->NULL
- * 输出: 5->4->3->2->1->NULL
- * @return int 
+ * @brief 876. 链表的中间结点
+ * https://leetcode-cn.com/problems/middle-of-the-linked-list/
+ * @param head 
+ * @return struct ListNode* 
  */
+struct ListNode* middleNode(struct ListNode* head){
+    if(head == NULL)
+        return NULL;
+    // head = head->next;
+    struct ListNode *fast = head;
+    struct ListNode *slow = head;
+    while(fast != NULL && fast->next != NULL)
+    {
+        fast = fast->next->next;
+        slow = slow->next;
+    }
+    return slow;
+}
+
 int main()
 {
     struct ListNode * l1;
     struct ListNode * l2;
     list_init(&l1);
     list_append(&l1, 1);
+    list_append(&l1, 2);
     list_append(&l1, 3);
+    list_append(&l1, 4);
     list_append(&l1, 5);
+    // list_append(&l1, 6);
+    middleNode(l1);
 
     list_init(&l2);
     list_append(&l2, 2);
     list_append(&l2, 4);
     list_append(&l2, 6);
+    
 
     struct ListNode *r = mergeTwoLists(l1->next, l2->next);
 
