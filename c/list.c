@@ -66,8 +66,11 @@ bool list_append(struct ListNode* * l, int node)
 }
 
 /**
- * @brief 删除链表中等于给定值 val 的所有节点。
- * 
+ * @brief 203. 移除链表元素 删除链表中等于给定值 val 的所有节点。
+ * https://leetcode-cn.com/problems/remove-linked-list-elements/
+ * 没有头结点的链表
+ * 输入: 1->2->6->3->4->5->6, val = 6
+ * 输出: 1->2->3->4->5
  * @param head 
  * @param val 
  * @return struct ListNode* 
@@ -76,11 +79,12 @@ struct ListNode* removeElements(struct ListNode* head, int val){
 	struct ListNode * discard;
     struct ListNode * pHead = head;
 	
-	if(head == NULL)
-		return NULL;
+	while (head != NULL && head->val == val) {
+        head = head->next;
+    }
 
-
-    while(head->next != NULL)
+    // head = head->next;
+    while(head)
     {
         if(head->next->val == val)
         {
@@ -232,21 +236,23 @@ int main()
     list_init(&l1);
     list_append(&l1, 1);
     list_append(&l1, 2);
-    list_append(&l1, 3);
-    list_append(&l1, 4);
-    list_append(&l1, 5);
     // list_append(&l1, 6);
-    middleNode(l1);
+    // list_append(&l1, 3);
+    // list_append(&l1, 4);
+    // list_append(&l1, 5);
+    // list_append(&l1, 6);
+    removeElements(l1->next, 1);
+    // middleNode(l1);
 
-    list_init(&l2);
-    list_append(&l2, 2);
-    list_append(&l2, 4);
-    list_append(&l2, 6);
+    // list_init(&l2);
+    // list_append(&l2, 2);
+    // list_append(&l2, 4);
+    // list_append(&l2, 6);
     
 
-    struct ListNode *r = mergeTwoLists(l1->next, l2->next);
+    // struct ListNode *r = mergeTwoLists(l1->next, l2->next);
 
-    // r = r->next;
+    struct ListNode *r = removeElements(l1->next, 6);;
     while(r)
     {
         printf("%d\t", r->val);
