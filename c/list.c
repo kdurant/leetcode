@@ -122,7 +122,12 @@ struct ListNode* reverseList(struct ListNode* head){
     return prev;
 }
 
-
+/**
+ * @brief 删除排序链表中的重复元素
+ * https://leetcode-cn.com/problems/remove-duplicates-from-sorted-list/
+ * @param head 
+ * @return struct ListNode* 
+ */
 struct ListNode* deleteDuplicates(struct ListNode* head){
     if(head == NULL)
         return NULL;
@@ -143,8 +148,61 @@ void deleteNode(struct ListNode* node) {
     *node = *(node->next);
 }
 
+/**
+ * @brief 将两个有序链表合并为一个新的有序链表并返回。新链表是通过拼接给定的两个链表的所有节点组成的
+ * https://leetcode-cn.com/problems/merge-two-sorted-lists/
+ * 
+ * 合并的是没有头结点的链表
+ * @param l1 
+ * @param l2 
+ * @return struct ListNode* 
+ */
 struct ListNode* mergeTwoLists(struct ListNode* l1, struct ListNode* l2){
+    // struct ListNode *head = malloc(sizeof(struct ListNode));
+    // struct ListNode *head = (l1->val <= l2->val) ? l1 : l2;
+    
+    if(l1 == NULL)
+        return l2;
 
+    if(l2 == NULL)
+        return l1;
+
+    struct ListNode *head;
+    if(l1->val <= l2->val)
+    {
+        head = l1;
+        l1 = l1->next;
+    }
+    else
+    {
+        head = l2;
+        l2 = l2->next;
+    }
+    
+    struct ListNode *result = head;
+
+
+    while( (l1 != NULL) && (l2 != NULL) )
+    {
+        if(l1->val <= l2->val)
+        {
+            head->next = l1;
+            l1 = l1->next;
+            head = head->next;
+        }
+        else
+        {
+            head->next = l2;
+            l2 = l2->next;
+            head = head->next;
+        }
+    }
+    if(l1 == NULL)
+        head->next = l2;
+    
+    if(l2 == NULL)
+        head->next = l1;
+    return result;
 }
 /**
  * @brief 反转一个单链表。
@@ -154,18 +212,24 @@ struct ListNode* mergeTwoLists(struct ListNode* l1, struct ListNode* l2){
  */
 int main()
 {
-    struct ListNode * l;
-    list_init(&l);
-    list_append(&l, 1);
-    list_append(&l, 1);
-    list_append(&l, 2);
-    list_append(&l, 3);
-    // list_append(&l, 6);
-    // removeElements(l, 6);
-    deleteDuplicates(l);
-    while(l)
+    struct ListNode * l1;
+    struct ListNode * l2;
+    list_init(&l1);
+    list_append(&l1, 1);
+    list_append(&l1, 3);
+    list_append(&l1, 5);
+
+    list_init(&l2);
+    list_append(&l2, 2);
+    list_append(&l2, 4);
+    list_append(&l2, 6);
+
+    struct ListNode *r = mergeTwoLists(l1->next, l2->next);
+
+    // r = r->next;
+    while(r)
     {
-        printf("%d\t", l->val);
-        l = l->next;
+        printf("%d\t", r->val);
+        r = r->next;
     }
 }
