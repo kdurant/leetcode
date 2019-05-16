@@ -1,3 +1,6 @@
+/*
+clang -O1 -g -fsanitize=address -fno-omit-frame-pointer 
+*/
 #include <stdio.h>
 #include <stdint.h>
 #include <stdlib.h>
