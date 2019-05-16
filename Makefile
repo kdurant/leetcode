@@ -4,6 +4,7 @@ CC = gcc
 CFLGAS += -std=c99
 CFLAGS += -D TEST
 CFLAGS += -g
+CFLAGS += -Wall
 
 OBJ_PATH = .
 BIN_PATH = .

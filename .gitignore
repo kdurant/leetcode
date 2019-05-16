@@ -20,3 +20,7 @@ GTAGS*
 test.*
 *.exe
 *.s
+*.out
+*.lib
+*.exp
+*.pdb
