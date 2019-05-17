@@ -76,30 +76,12 @@ bool list_append(struct ListNode* * l, int node)
  * @param val 
  * @return struct ListNode* 
  */
-struct ListNode* removeElements(struct ListNode* head, int val){
-	struct ListNode * discard;
-	struct ListNode * pHead;
-	while (head != NULL && head->val == val) {      // 列表就第一个节点就是要删除的值
-        head = head->next;
-    }
-    if(head == NULL)
-        return NULL;
-    pHead = head;
-
-    while(head->next)
-    {
-        if(head->next->val == val)
-        {
-            discard = head->next;
-            head->next = head->next->next;
-
-            free(discard);
-        }
-        else
-            head = head->next;
-    }	
-
-	return pHead;
+struct ListNode *removeElements(struct ListNode *head, int val)
+{
+    if (!head)
+        return head;
+    head->next = removeElements(head->next, val);
+    return head->val == val ? head->next : head;
 }
 
 /**
@@ -237,13 +219,13 @@ int main()
     struct ListNode * l2;
     list_init(&l1);
     list_append(&l1, 1);
-    // list_append(&l1, 2);
-    // list_append(&l1, 6);
-    // list_append(&l1, 3);
-    // list_append(&l1, 4);
-    // list_append(&l1, 5);
-    // list_append(&l1, 6);
-    struct ListNode *r = removeElements(l1->next, 1);
+    list_append(&l1, 2);
+    list_append(&l1, 6);
+    list_append(&l1, 3);
+    list_append(&l1, 4);
+    list_append(&l1, 5);
+    list_append(&l1, 6);
+    struct ListNode *r = removeElements(l1->next, 6);
     // middleNode(l1);
 
     // list_init(&l2);

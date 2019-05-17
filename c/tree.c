@@ -31,13 +31,18 @@ int find_node(struct TreeNode **T, int data)
     return 0;
 }
 
+/**
+ * @brief 根 左 右
+ * 
+ * @param T 
+ */
 void pre_order(struct TreeNode **T)
 {
 
 }
 
 /**
- * @brief 左 -> 根 -> 右
+ * @brief 左 根 右
  * 
  * @param T 
  */
@@ -51,6 +56,11 @@ void mid_order(struct TreeNode * T)
     }
 }
 
+/**
+ * @brief 左 右 根
+ * 
+ * @param T 
+ */
 void post_order(struct TreeNode ** T)
 {
     
