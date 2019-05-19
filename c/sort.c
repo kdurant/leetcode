@@ -87,7 +87,7 @@ void insert_sort(int *data, int len)
 }
 
 /**
- * @brief 归并排序
+ * @brief 归并排序, 是一种高效的、通用的、基于比较的排序算法
  * 
  * @param data 
  * @param first 
@@ -149,13 +149,49 @@ void merge_sort(int *data, unsigned int first, unsigned int last)
     }
 }
 
+/**
+ * @brief 快速排序
+ * 1. 设置两个变量i、j，排序开始的时候i=1，j=N；
+ * 2. 以第一个数组元素arr[0]作为基准元素，赋值给pirot，即pirot=arr[0]；
+ * 3. 从j开始向前搜索，即由后开始向前搜索,只要j大于pirot, j=j-1，一旦找到第一个小于pirot的值，两者交换,然后把主动权交给i,让i跑；
+ * 4. 从i开始向后搜索，即由前开始向后搜索,只要i小于pirot, i=i+1，一旦找到第一个大于pirot的值，两者交换,然后把主动权交给j,让j跑；
+ * 5. 重复第3、4步，直到 i=j 
+ * @param data 
+ * @param low 
+ * @param high 
+ */
+void quicksort(int *data, int low, int high)
+{
+    int i = low;
+    int j = high;
+    int pirot = data[i];
+
+    if(low > high)
+        return;
+    while(i < j)
+    {
+        while( (data[j] >= pirot) && (i < j) )
+        {
+            j--;
+        }
+        data[i] = data[j];
+        while ( (data[i] <= pirot) && (i < j))
+        {
+            i++;
+        }
+        data[j] = data[i];
+    }
+    data[i] = pirot;
+    quicksort(data, low, i-1);
+    quicksort(data, j+1, high);
+} 
 
 int main()
 {
-    // int a[] = {900, 2, 3, -58, 34, 76, 32, 43, 56, -70, 35, -234, 532, 543, 2500};
-    int a[] = {900, 2, 3, -58};
+    int a[] = {900, 2, 3, -58, 34, 76, 32, 43, 56, -70, 35, -234, 532, 543, 2500};
+    // int a[] = {900, 2, 3, -58};
 
-    merge_sort(a, 0, sizeof(a)/4-1);
+    quicksort(a, 0, sizeof(a)/4-1);
     for (size_t i = 0; i < sizeof(a)/4; i++)
     {
         printf("%d\t", a[i]);
