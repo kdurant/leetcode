@@ -23,15 +23,8 @@ https://leetcode-cn.com/problems/hamming-distance/
 */
 #include <stdio.h>
 
-int hammingDistance(int x, int y){
-    int d = 0;
-    int t = x ^ y;
-    for (size_t i = 0; i < 32; i++)
-    {
-        if((t>>i) & 0x01)
-            d++;
-    }
-    return d;
+int romanToInt(char * s){
+
 }
 
 
