@@ -89,6 +89,26 @@ struct TreeNode * insert_tree(struct TreeNode * T, int data)
 }
 
 /**
+ * @brief 合并二叉树， 如果两个节点重叠，那么将他们的值相加作为节点合并后的新值，否则不为 NULL 的节点将直接作为新二叉树的节点
+ * https://leetcode-cn.com/problems/merge-two-binary-trees/
+ * @param t1 
+ * @param t2 
+ * @return struct TreeNode* 
+ */
+struct TreeNode* mergeTrees(struct TreeNode* t1, struct TreeNode* t2)
+{
+    if(t1 == NULL)
+        return t2;
+    
+    if(t2 == NULL)
+        return t1;
+    
+    t1->val += t2->val;
+    t1->left = mergeTrees(t1->left, t2->left);
+    t1->right = mergeTrees(t1->right, t2->right);
+    return t1;
+}
+/**
  * @brief 获得树的高度(根到一片树叶的最长路径)
  * 
  * @param T 
@@ -120,6 +140,7 @@ int main()
     {
         tree = insert_tree(tree, a[i]);
     }
+    mergeTrees(tree, tree);
     mid_order(tree);
     printf("\ntree height = %d\n", get_tree_height(tree));
     return 0;
