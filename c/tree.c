@@ -110,7 +110,7 @@ struct TreeNode* mergeTrees(struct TreeNode* t1, struct TreeNode* t2)
 }
 /**
  * @brief 获得树的高度(根到一片树叶的最长路径)
- * 
+ * https://leetcode-cn.com/problems/maximum-depth-of-binary-tree/
  * @param T 
  * @return int 
  */
@@ -128,6 +128,31 @@ int get_tree_height(struct TreeNode * T)
 
     //     return (right_h > left_h) ? right_h+1 : left_h+1;
     // }
+}
+
+/**
+ * @brief https://leetcode-cn.com/problems/univalued-binary-tree/
+ * 
+ * @param root 
+ * @return true 
+ * @return false 
+ */
+bool func(struct TreeNode* Node,int value)
+{
+    if(NULL==Node)
+    {
+        return true;
+    }
+    else
+    {
+        return value==Node->val && func(Node->left,value) && func(Node->right,value);
+    }
+}
+
+bool isUnivalTree(struct TreeNode* root) 
+{
+    int value=root->val;
+    return func(root->left,value) && func(root->right,value);
 }
 
 int main()

@@ -24,6 +24,26 @@ int sum(int n)
 3. `n=1`时，跳出递归
 
 # 阶乘
+1. 子问题是`N-1 * N-2 * ... * 2 * 1`, 和原问题一致且更简单
+2. 
+3. `n=0`时，跳出递归
+
+```c
+int factorial(int n)
+{
+    int result = 1;
+    int tmp;
+    if(n == 0)
+        return 1;
+    else
+    {
+        tmp = factorial(n-1);
+        result = n * tmp;
+    }
+    
+    return result;
+}
+```
 
 # 折半查找递归算法
 
@@ -94,3 +114,26 @@ int climbStairs(int n)
 
 
 # 汉诺塔问题
+
+# 小猴子吃桃
+小猴子第一天摘下若干桃子,当即吃掉一半,又多吃一个.第二天早上又将剩下的桃子吃
+一半,又多吃一个.以后每天早上吃前一天剩下的一半另一个.到第10天早上猴子想再吃时发
+现,只剩下一个桃子了.问第一天猴子共摘多少个桃子？
+
+```c
+// 每天吃一半且多一个
+// 今天的数量 = （明天的数量+1）*2
+int monkeyEatPeach(int n)
+{
+    int result = 0;
+    int tmp;
+    if(n == 1) 
+        return 1;
+    else
+    {
+        tmp = (monkeyEatPeach(n-1) + 1)*2;
+        result = tmp;
+    }
+    return result;
+}
+```

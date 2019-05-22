@@ -14,6 +14,12 @@ https://leetcode-cn.com/problems/reverse-string/
 
 #include<limits.h>
 
+/**
+ * @brief 
+ * 使用额外的内存空间保存数据, 空间复杂度O(n)
+ * @param s 
+ * @param sSize 
+ */
 void reverseString1(char* s, int sSize) {
     char *n = (char *)malloc(sizeof(char)*sSize);
     for(size_t i = sSize; i > 0; i--)
@@ -25,6 +31,12 @@ void reverseString1(char* s, int sSize) {
     free(n);
 }
 
+/**
+ * @brief 
+ * 双指针，原地翻转
+ * @param s 
+ * @param sSize 
+ */
 void reverseString2(char* s, int sSize) {
     int i = 0;
     int j = sSize-1;
@@ -39,12 +51,34 @@ void reverseString2(char* s, int sSize) {
     }
 }
 
+void swap(int start, int end, char *s)
+{
+    if(start >= end)
+        return;
+    
+    char temp = s[start];
+    s[start] = s[end];
+    s[end] = temp;
+    swap(start+1, end-1, s);
+}
+/**
+ * @brief 递归的交换首尾字符
+ * 
+ * @param s 
+ * @param sSize 
+ */
+void reverseString3(char *s, int sSize)
+{
+    int len = sSize-1;
+    swap(0, len, s);
+}
+
 int main()
 {
     // int nums[] = {0,11,0,3};
     char nums1[] = {'a', 'b', 'c', 'd'};
-    reverseString(nums1, 4);
-    for(size_t i = 0; i < 4; i++)
+    reverseString3(nums1, sizeof(nums1)/sizeof(char));
+    for(size_t i = 0; i < sizeof(nums1)/sizeof(char); i++)
     {
         printf("%c ", nums1[i]);
     }
