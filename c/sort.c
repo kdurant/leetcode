@@ -188,10 +188,11 @@ void quicksort(int *data, int low, int high)
 
 int main()
 {
-    int a[] = {900, 2, 3, -58, 34, 76, 32, 43, 56, -70, 35, -234, 532, 543, 2500};
-    // int a[] = {900, 2, 3, -58};
+    // int a[] = {900, 2, 3, -58, 34, 76, 32, 43, 56, -70, 35, -234, 532, 543, 2500};
+    int a[] = {900, 2, 3, -58, 34};
 
-    quicksort(a, 0, sizeof(a)/4-1);
+    // quicksort(a, 0, sizeof(a)/4-1);
+    merge_sort(a, 0, sizeof(a)/4-1);
     for (size_t i = 0; i < sizeof(a)/4; i++)
     {
         printf("%d\t", a[i]);

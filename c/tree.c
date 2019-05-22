@@ -108,6 +108,20 @@ struct TreeNode* mergeTrees(struct TreeNode* t1, struct TreeNode* t2)
     t1->right = mergeTrees(t1->right, t2->right);
     return t1;
 }
+
+/**
+ * @brief 删除结点
+ * 如果是树叶，直接删除
+ * 如果节点有一个儿子，则该节点的父节点调整指针，绕过该节点后删除
+ * 如果节点有两个儿子，
+ * @param root 
+ * @return struct TreeNode* 
+ */
+// struct TreeNode* deleteTreeNode(struct TreeNode* root, int val)
+// {
+
+// }
+
 /**
  * @brief 获得树的高度(根到一片树叶的最长路径)
  * https://leetcode-cn.com/problems/maximum-depth-of-binary-tree/
