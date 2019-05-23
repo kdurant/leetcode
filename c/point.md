@@ -144,12 +144,61 @@ void show_array(char (*p)[20], int len)
 > 即数组里的每个元素。数组在这里并没有名字，是个匿名数组
 
 ## 动态分配二维数组
-1. 分配可能不连续的内存
+1. 使用二级指针
+先分配“外层”数组，然后再为每一行分配内层，分配的内存可能连续，也可能不连续
 ```c
-int **array = malloc(rows * sizeof(int *));
-for(i = 0; i < rows; i++)
-    array[i] = mallos(columns * sizeof(int));
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int main()
+{
+    int ** twoArray;
+    int row = 2;
+    int col = 4;
+
+    twoArray = (int **)malloc(sizeof(int *) * row);
+    for (size_t i = 0; i < row; i++)
+    {
+        twoArray[i] = (int *)malloc(sizeof(int) * col);
+    }
+    
+    for (size_t i = 0; i < row; i++)
+    {
+        for (size_t j = 0; j < col; j++)
+        {
+            printf("%p\t", &twoArray[i][j]);
+        }
+        printf("\n");        
+    }
+    return 0;
+}
 ```
+
+1. 使用数组指针，分配的内存是连续的
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int main()
+{
+    int row = 2;
+    int col = 4;
+    int (* twoArray)[2] = (int (*)[2])malloc(sizeof(int)*col*row);
+    for (size_t i = 0; i < row; i++)
+    {
+        for (size_t j = 0; j < col; j++)
+        {
+            printf("%p\t", &twoArray[i][j]);
+        }
+        printf("\n");        
+    }
+    
+    return 0;
+}
+```
+
 
 # 4. 指针数组
 类比`整型数组`, 数组里存放的是整型元素; 指针数组里的元素是**指针**. 

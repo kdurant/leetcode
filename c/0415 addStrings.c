@@ -15,6 +15,7 @@ num1 和num2 都不包含任何前导零。
 #include <stdlib.h>
 #include <string.h>
 
+#define     NUMERICAL   10
 void reverseString(char* s, int sSize) {
     int i = 0;
     int j = sSize-1;
@@ -52,8 +53,8 @@ char * addStrings(char * num1, char * num2){
 
     for ( ; *num1 && *num2 ; num1++, num2++)
     {
-        r[k++] = ((*num1-0x30) + (*num2-0x30) + carry)%10 + 0x30;
-        if((*num1-0x30) + (*num2-0x30) + carry>= 10)
+        r[k++] = ((*num1-0x30) + (*num2-0x30) + carry)%NUMERICAL + 0x30;
+        if((*num1-0x30) + (*num2-0x30) + carry>= NUMERICAL)
             carry = 1;
         else 
             carry = 0;
@@ -68,8 +69,8 @@ char * addStrings(char * num1, char * num2){
     {
         for(;*num1 != '\0'; num1++)
         {
-            r[k++] = (*num1 - 0x30 + carry)%10 + 0x30;
-            if(*num1 - 0x30 + carry >= 10)
+            r[k++] = (*num1 - 0x30 + carry)%NUMERICAL + 0x30;
+            if(*num1 - 0x30 + carry >= NUMERICAL)
                 carry = 1;
             else 
                 carry = 0;
@@ -77,8 +78,8 @@ char * addStrings(char * num1, char * num2){
         for(; *num2 != '\0'; num2++)
         {
             
-            r[k++] = (*num2 - 0x30 + carry)%10 + 0x30;
-            if(*num2 - 0x30 + carry >= 10)
+            r[k++] = (*num2 - 0x30 + carry)%NUMERICAL + 0x30;
+            if(*num2 - 0x30 + carry >= NUMERICAL)
                 carry = 1;
             else 
                 carry = 0;
@@ -92,7 +93,7 @@ char * addStrings(char * num1, char * num2){
 
 int main()
 {
-    char num1[] = "0";
-    char num2[] = "0";
+    char num1[] = "999";
+    char num2[] = "1";
     printf("%s\n", addStrings(num1, num2));
 }
