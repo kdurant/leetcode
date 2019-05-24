@@ -63,6 +63,21 @@ int fibonacci(int n)
         return result;
     }
 }
+
+int fibonacci2(int n)
+{
+    if(n < 0)
+        return -1;
+    
+    int *res = malloc(sizeof(int)* (n+1));
+    res[0] = 1;
+    res[1] = 1;
+    for (size_t i = 2; i < n; i++)
+    {
+        res[i] = res[i-1] + res[i-2];
+    }
+    return res[n-1];    
+}
 ```
 
 # [爬楼梯](https://leetcode-cn.com/problems/climbing-stairs/)
