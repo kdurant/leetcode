@@ -1,5 +1,5 @@
 /*
-clang -O1 -g -fsanitize=address -fno-omit-frame-pointer 
+clang -O1 -g -fsanitize=address -fno-omit-frame-pointer ./c/test.c
 */
 #include <stdio.h>
 #include <stdint.h>
