@@ -4,7 +4,7 @@
 3. `@`表示尝试解决但没有成功
 
 # 更详细的堆栈检查
-`clang -O1 -g -fsanitize=address -fno-omit-frame-pointer xx.c`
+`clang -O1 -g -fsanitize=address -fno-omit-frame-pointer ./c/test.c`
 
 # qsort
 ```c
