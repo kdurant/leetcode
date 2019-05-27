@@ -5,6 +5,7 @@ CFLGAS += -std=c99
 CFLAGS += -D TEST
 CFLAGS += -g
 CFLAGS += -Wall
+# CFLAGS += -fsanitize=address
 
 OBJ_PATH = .
 BIN_PATH = .
