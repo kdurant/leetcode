@@ -35,14 +35,15 @@ char ** commonChars(char ** A, int ASize, int* returnSize){
     for (size_t i = 0; i < ASize; i++)
     {   
         s = A[i];
-        while(*s++)
+        while(*s)
         {
             c[*s-0x61] += 1;
+            s++;
         }
     }
-    for (size_t i = 0; i < ASize; i++)
+    for (size_t i = 0; i < 26; i++)
     {
-        if(c[i] == 3)
+        if(c[i] != 0 && (c[i] % 3 == 0) )
         {
             *res = (char *)&c[i];
             len++;
@@ -58,4 +59,8 @@ int main()
     int returnSize = 3;
     char **t = malloc(sizeof(char *) * 26);
     t = commonChars(s, 3, &returnSize);
+
+    for (int i = 0; i < returnSize; ++i) {
+        printf("%s ", t[i]);
+    }
 }
