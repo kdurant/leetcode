@@ -175,7 +175,7 @@ int main()
 }
 ```
 
-1. 使用数组指针，分配的内存是连续的
+2. 使用数组指针，分配的内存是连续的
 ```c
 #include <stdio.h>
 #include <stdlib.h>
@@ -213,7 +213,7 @@ char *str[3] = {
 `[]`的优先级大于`*`，str先与`[]`结合，说明这是一个数组，数组里的元素str[0], str[1], str[2]都是指向`char *`的指针。对于单个元素可以将声明简化为：
 ```c
 char * str0;
-char * str2;
+char * str1;
 char * str2;
 ```
 
