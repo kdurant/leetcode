@@ -40,8 +40,7 @@ int **flipAndInvertImage(int **A, int ARowSize, const int *AColSizes, int **colu
      */
     int i, j, **p;
     *returnSize = ARowSize;
-    p = (int **)malloc(ARowSize * sizeof(int *)); /*
-                                                   * 在函数中使用指针创建二维数组，需要一个二级指针和一个指针数组*/
+    p = (int **)malloc(ARowSize * sizeof(int *)); //在函数中使用指针创建二维数组，需要一个二级指针和一个指针数组
     *columnSizes = (int *)malloc(sizeof(int) * ARowSize);
     for(i = 0; i < ARowSize; i++)
     {
