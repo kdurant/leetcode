@@ -33,6 +33,7 @@
 #include <stdbool.h>
 #include <stdlib.h>
 
+#if 0
 int compare(const void* a, const void* b)
 {
     return *(int*)a - *(int*)b;
@@ -61,6 +62,23 @@ int maxProfit(int* prices, int pricesSize)
     }
     return r;
 }
+#endif
+
+int maxProfit(int* prices, int pricesSize)
+{
+    int r   = 0;
+    int tmp = 0;
+    if((pricesSize == 1) || (pricesSize == 0))
+        return 0;
+    for(int i = 1; i < pricesSize; i++)
+    {
+        tmp = prices[i] - prices[i - 1];
+        if(tmp > 0)
+            r += tmp;
+    }
+    return r;
+}
+
 int main(void)
 {
     int a[] = {7, 1, 5, 3, 6, 4};
@@ -71,4 +89,3 @@ int main(void)
 
     return 0;
 }
-
