@@ -21,10 +21,21 @@ void qsort(void * base, size_t nmemb, size_t size, int (*compare)(const void*, v
 * 第一个元素大于第二个元素，返回大于零的整数
 
 ```c
-int compare(const void *a , const void *b)
+/*
+将形参要强制类型转换为数组元素的类型
+*/
+int compare(const void* a, const void* b)
 {
-    return *(int *)a - *(int *)b;
+    int arg1 = *(const int*)a;
+    int arg2 = *(const int*)b;
+
+    if(arg1 < arg2)
+        return -1;
+    if(arg1 > arg2)
+        return 1;
+    return 0;
 }
+
 
 int values[] = { 88, 56, 100, 2, 25 };
 qsort(values, 5, sizeof(int), compare);
