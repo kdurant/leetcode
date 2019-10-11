@@ -20,6 +20,7 @@ S 和 C 中的所有字母均为小写字母。
 #include <iostream>
 #include <string>
 #include <vector>
+#include <algorithm>
 #include <set>
 
 using namespace std;
@@ -35,20 +36,23 @@ public:
 
         for(int i{0}; i < n; ++i)
         {
+            //如果当前字符是C
             if(S[i] == C)
             {
                 res[i] = 0;
                 continue;
             }
 
+            // 向右查找
             int j = i + 1;
             while(j < n && S[j] != C)
             {
                 ++j;
             }
-            if(j < n)
+            if(j < n)  // 保存距离
                 res[i] = j - i;
             j = i - 1;
+            // 向左查找
             while(j >= 0 && S[j] != C)
             {
                 --j;
