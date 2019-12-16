@@ -19,7 +19,7 @@ TARGET = $(BIN_PATH)/main
 # 	TARGET_NAME := $(addsuffix .exe,$(TARGET_NAME))
 # endif
 
-C_SRCS += ./c/test.c
+C_SRCS += test.c
 OBJ := $(patsubst %.c,%.o,$(filter %.c,$(C_SRCS)))
 
 
