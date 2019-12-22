@@ -1,5 +1,6 @@
-# AddressSanitizer: heap-buffer-overflow
-访问了malloc分配空间以外的空间，会产生这个问题
+AddressSanitizer: 
+# heap-buffer-overflow 堆缓存访问溢出
+访问的位置超出堆上数组array的边界，会产生这个问题
 ```c
 bool rotateString(char* A, char* B)
 {
@@ -30,3 +31,10 @@ int main(void)
 }
 ```
 给s分配内存的时候，少分配了'\0'的空间，`strcmp`的时候会出现这个问题
+
+# stack buffer overflow 栈缓存访问溢出
+
+# global buffer overflow 全局缓冲访问溢出
+
+LeakSanitizer: 
+# detected memory leaks
