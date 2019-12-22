@@ -25,7 +25,7 @@ class Solution
 {
 public:
     /**
-     * @brief
+     * @brief 每个数进入哈希表前，先查询哈希表中有没有自己要配对的数
      *
      * @param nums
      * @param target
