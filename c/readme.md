@@ -40,3 +40,47 @@ int compare(const void* a, const void* b)
 int values[] = { 88, 56, 100, 2, 25 };
 qsort(values, 5, sizeof(int), compare);
 ```
+
+# 二维数组的参数传递
+## leetcode上通用函数原型
+```c
+/**
+ * @brief 
+ *
+ * @param array                 二维数组指针
+ * @param row                   输入二维数组的行数
+ * @param col                   输入二维数组的列数
+ * @param returnSize            返回二维数组的行数
+ * @param returnColumnSizes     返回二维数组的列数
+ *
+ * @return 
+ */
+int** func(int** array, int row, int* col, int* returnSize, int** returnColumnSizes)
+{
+}
+```
+
+## array类型构建
+/*
+ * 调用函数前的准备工作
+ * array 是二维数组 array[M][N], 可以看做M个一维数组（元素数量为N）
+ * 可看成指针数组type *array[N];
+ *
+```c
+int A[3][3] = {{1, 1, 0}, {1, 0, 1}, {0, 0, 0}};
+
+int *p[3];
+p[0] = A[0]; 
+p[1] = A[1];
+p[2] = A[2];
+int **q = p;
+```
+
+## row类型
+二维数组的行数, int
+
+## col类型
+将二维数组行的元素个数，放到一个数组里，然后传递数组名
+```c
+int col[3] = {3, 3, 3};
+```
