@@ -14,7 +14,7 @@ SRC_PATH = ./c
 IDIR = .
 INC += -I$(IDIR)
 
-TARGET = $(BIN_PATH)/main 
+TARGET = $(BIN_PATH)/a 
 # ifeq ($(OS),Windows_NT)
 # 	TARGET_NAME := $(addsuffix .exe,$(TARGET_NAME))
 # endif
@@ -24,11 +24,7 @@ OBJ := $(patsubst %.c,%.o,$(filter %.c,$(C_SRCS)))
 
 
 $(TARGET) : $(OBJ_PATH)/$(OBJ)
-	$(CC) $(INC) $(CFLAGS)  $(OBJ)  -o $(TARGET)
-	@find . -name "*.o"  | xargs rm -f
-	# @-rm *.exe
-	echo ###############################
-	./main.exe
+	@ $(CC) $(INC) $(CFLAGS)  $(OBJ)  -o $(TARGET)
 
 $(OBJ): %.o : %.c
 	$(CC) $(INC) $(CFLAGS) -c $< -o $@
