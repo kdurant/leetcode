@@ -29,61 +29,61 @@
 #include <stdbool.h>
 #include <stdlib.h>
 
-int** transpose(int** A, int ASize, int* AColSize, int* returnSize, int** returnColumnSizes)
+int **flipAndInvertImage(int **A, int ARowSize, const int *AColSizes, int **columnSizes, int *returnSize)
 {
-    int** r = malloc((*AColSize) * (sizeof(int*)));
+    int i, j;
 
-    for(int i = 0; i < *AColSize; i++)
+    int **ret = (int **)malloc(ARowSize * sizeof(int *));  //在函数中使用指针创建二维数组，需要一个二级指针和一个指针数组
+
+    *returnSize  = ARowSize;
+    *columnSizes = (int *)malloc(sizeof(int) * ARowSize);
+
+    for(i = 0; i < ARowSize; i++)
     {
-        r[i] = malloc(ASize * sizeof(int));
-        for(int j = 0; j < ASize; j++)
-        {
-            int* row_data = A[j];
+        (*columnSizes)[i] = AColSizes[i];
 
-            r[i][j] = row_data[i];
+        ret[i] = (int *)malloc(AColSizes[i] * sizeof(int));
+
+        for(j = 0; j < (AColSizes[i] + 1) / 2; j++)
+        {
+            ret[i][j]                    = A[i][AColSizes[i] - 1 - j] ^ 1;
+            ret[i][AColSizes[i] - 1 - j] = A[i][j] ^ 1;
         }
     }
-    *returnSize        = *AColSize;
-    *returnColumnSizes = malloc(sizeof(int) * (*AColSize));
-    for(int i = 0; i < *AColSize; i++)
-    {
-        returnColumnSizes[0][i] = ASize;
-    }
-
-    return r;
+    return ret;
 }
 
 int main(void)
 {
-#if 0
+#if 1
     int  row1[]    = {1, 2, 3};
     int  row2[]    = {4, 5, 6};
-    int* A[3]      = {row1, row2};
+    int *A[3]      = {row1, row2};
     int  AColSizes = 3;
 
-    int** r;
+    int **ret;
     int   row;
-    int*  col;
-    r = transpose(A, 2, &AColSizes, &row, &col);
+    int * col;
+    ret = transpose(A, 2, &AColSizes, &row, &col);
 
 #else
 
     int  row1[]    = {5};
     int  row2[]    = {8};
-    int* A[2]      = {row1, row2};
+    int *A[2]      = {row1, row2};
     int  AColSizes = 1;
 
-    int** r;
+    int **ret;
     int   row;
-    int*  col;
-    r = transpose(A, 2, &AColSizes, &row, &col);
+    int * col;
+    ret = transpose(A, 2, &AColSizes, &row, &col);
 #endif
 
     for(int i = 0; i < row; i++)
     {
         for(int j = 0; j < *col; j++)
         {
-            printf("%d\t", r[i][j]);
+            printf("%d\t", ret[i][j]);
         }
         printf("\n");
     }

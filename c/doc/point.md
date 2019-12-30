@@ -19,6 +19,10 @@ const int* pci;
 3. const `int* pci`, pci是个指向整型数据的指针变量
 4. `const int* pci`, pci是个指向整型常量的指针变量
 
+## 指针类型
+1. 指针本身的类型
+2. 指针所指向的类型
+
 ## 间接引用操作符(\*)，取地址运算符(&)
 地址操作符会&会返回操作数的地址
 间接引用操作符（*）返回指针变量指向的值，一般称解引指针
@@ -77,7 +81,9 @@ printf("%c\n", *buf++);     // 不正确
 int var;
 int *p1 = &var;    // *p1 的值是 var的内容
 int ** p2 = &p1;   // *p2 的值是 p1的地址, 所以 **p2的值是var的内容
+```
 
+```c
 typedef struct Node
 {
     int data;
