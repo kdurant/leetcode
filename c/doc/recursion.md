@@ -23,6 +23,52 @@ int sum(int n)
 2. 
 3. `n=1`时，跳出递归
 
+# 数组求和
+```c
+#include <stdio.h>
+
+int sum(int *nums, int size)
+{
+    if(size == 1)
+        return *nums;
+    else
+    {
+        return *nums + sum(nums + 1, size - 1);
+    }
+}
+
+int main(void)
+{
+    int nums[] = {1, 2, 3, 5, 4};
+    printf("%d\n", sum(nums, sizeof(nums) / sizeof(nums[0])));
+    return 0;
+}
+```
+
+# 求数组最大值
+```c
+#include <stdio.h>
+
+int max(int *nums, int size)
+{
+    if(size == 1)
+        return *nums;
+    int temp = max(nums + 1, size - 1);
+
+    if(*nums > temp)
+        return *nums;
+    else
+        return temp;
+}
+
+int main(void)
+{
+    int nums[] = {1, 20, 3, 5, 4};
+    printf("%d\n", max(nums, sizeof(nums) / sizeof(nums[0])));
+    return 0;
+}
+```
+
 # 阶乘
 1. 子问题是`N-1 * N-2 * ... * 2 * 1`, 和原问题一致且更简单
 2. 
@@ -139,17 +185,23 @@ int climbStairs(int n)
 ```c
 // 每天吃一半且多一个
 // 今天的数量 = （明天的数量+1）*2
+#include <stdio.h>
+
+// 吃掉一半,又多吃一个
+// 前一天有 N， 则吃 (N/2) - 1
+// 后一天有 M，则前一天 2(M+1)
 int monkeyEatPeach(int n)
 {
-    int result = 0;
-    int tmp;
-    if(n == 1) 
+    if(n == 1)
         return 1;
-    else
-    {
-        tmp = (monkeyEatPeach(n-1) + 1)*2;
-        result = tmp;
-    }
-    return result;
+
+    return 2 * (monkeyEatPeach(n - 1) + 1);
 }
+
+int main(void)
+{
+    printf("%d\n", monkeyEatPeach(10));
+    return 0;
+}
+
 ```
