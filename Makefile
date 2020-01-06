@@ -9,7 +9,7 @@ CFLAGS += -Wall
 
 OBJ_PATH = .
 BIN_PATH = .
-SRC_PATH = ./c
+SRC_PATH = .
 
 IDIR = .
 INC += -I$(IDIR)
