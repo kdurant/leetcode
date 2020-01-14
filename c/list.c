@@ -84,7 +84,7 @@ struct ListNode* removeElements(struct ListNode* head, int val)
 }
 
 /**
- * @brief
+ * @brief  0206 翻转链表https://leetcode-cn.com/problems/reverse-linked-list
  * 1. 保存head->next, 用作下一次迭代
  * 2. 将当前 head 插入到 prev 前面
  * 3. 当前head 变为 prev
