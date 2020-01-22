@@ -45,7 +45,7 @@ int main(void)
 }
 ```
 
-# 求数组最大值
+# 数组最大值
 ```c
 #include <stdio.h>
 
