@@ -205,3 +205,33 @@ int main(void)
 }
 
 ```
+
+# 最大公约数
+辗转相除法也叫欧几里得算法，是一种非常古老的求解两个数的最大公约数的算法。其基于的原理：两个正整数a和b（a > b），它们的最大公约数gcd等于a除以b的余数r和b之间的最大公约数。比如，10和25的最大公约数5等于25除以10的余数5和10的最大公约数；再比如51和21的最大公约数3等于51除以21的余数9和21的最大公约数，而9和21的最大公约数为3。根据上面的原理，辗转相除法的算法流程可以如下：
+步骤1：计算a与b的余数r。
+步骤2：如果r为0，则返回gcd = b。否则，转到步骤3。
+步骤3：使用b的值更新a的值，使用余数r更新b的值，转到步骤1。
+```c
+#include <stdio.h>
+#include <string.h>
+#include <stdbool.h>
+#include <stdlib.h>
+
+int gcd(int a, int b)
+{
+    if(a % b == 0)
+        return b;
+
+    int temp = a;
+    a        = b;
+    b        = temp % b;
+    return gcd(a, b);
+}
+
+int main(int argc, char const* argv[])
+{
+    printf("%d\n", gcd(51, 21));
+
+    return 0;
+}
+```
