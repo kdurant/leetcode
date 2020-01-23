@@ -214,6 +214,20 @@ struct ListNode* middleNode(struct ListNode* head)
     return slow;
 }
 
+/**
+ * @brief 遍历链表，打印链表节点
+ *
+ * @param head
+ */
+void list_visit_r(struct ListNode* head)
+{
+    if(head == NULL)
+        return;
+
+    printf("%d\n", head->val);
+    list_visit_r(head->next);
+}
+
 int main()
 {
     struct ListNode* l1;
@@ -226,7 +240,7 @@ int main()
     list_append(&l1, 4);
     list_append(&l1, 5);
     list_append(&l1, 6);
-    struct ListNode* r = removeElements(l1->next, 6);
+    // struct ListNode* r = removeElements(l1->next, 6);
     // middleNode(l1);
 
     // list_init(&l2);
@@ -237,9 +251,10 @@ int main()
     // struct ListNode *r = mergeTwoLists(l1->next, l2->next);
 
     // struct ListNode *r = removeElements(l1->next, 6);;
-    while(r)
-    {
-        printf("%d\t", r->val);
-        r = r->next;
-    }
+    // while(r)
+    // {
+    //     printf("%d\t", r->val);
+    //     r = r->next;
+    // }
+    list_visit_r(l1->next);
 }
