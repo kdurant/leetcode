@@ -48,6 +48,12 @@ private:
     }
 
 public:
+    /**
+     * @brief 回溯算法
+     *
+     * @param nums
+     * @return vector<vector<int>>
+     */
     vector<vector<int>> subsets(vector<int>& nums)
     {
         vector<vector<int>> res;
@@ -57,6 +63,12 @@ public:
         return res;
     }
 
+    /**
+     * @brief 使用位运算解决问题
+     *
+     * @param nums
+     * @return vector<vector<int>>
+     */
     vector<vector<int>> subsets1(vector<int>& nums)
     {
         vector<vector<int>> res;
