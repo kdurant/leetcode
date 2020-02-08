@@ -10,15 +10,14 @@ F(N) = F(N - 1) + F(N - 2), 其中 N > 1.
 
 #include <stdio.h>
 
-int fib(int N){
+int fib(int N)
+{
     if(N <= 1)
         return N;
-    return fib(N-2) + fib(N-1);
+    return fib(N - 2) + fib(N - 1);
 }
-
-
 
 int main()
 {
-    printf("%d\n", fib(5));
+    printf("%d\n", fib(50));
 }
