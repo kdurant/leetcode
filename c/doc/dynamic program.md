@@ -10,11 +10,33 @@
 # 使用动态规划步骤
 1. 设定状态
 2. 寻找状态转移方程
-3. 利用状态转移方程式自底向上求解问题
+   > 为啥叫「状态转移方程」？为了听起来高端。你把 f(n)想做一个状态 n，这个状态 nn是由状态n−1 和状态n−2 相加转移而来，这就叫状态转移，仅此而已。
+
+作者：labuladong
+链接：https://leetcode-cn.com/problems/fibonacci-number/solution/dong-tai-gui-hua-tao-lu-xiang-jie-by-labuladong/
+来源：力扣（LeetCode）
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+1. 利用状态转移方程式自底向上求解问题
 
 
 # 斐波那契数列
-
+```c
+// 动态规划的入门示例
+int fib(int n)
+{
+    if(n < 0)
+        return -1;
+    
+    int *res = malloc(sizeof(int)* (n+1));
+    res[0] = 1;
+    res[1] = 1;
+    for (size_t i = 2; i < n; i++)
+    {
+        res[i] = res[i-1] + res[i-2];
+    }
+    return res[n-1];    
+}
+```
 
 # [70. 爬楼梯](https://leetcode-cn.com/problems/climbing-stairs/)
 ## 分析
@@ -204,10 +226,56 @@ int main()
 注意你不能在买入股票前卖出股票。
 
 ## 分析
-- 买卖股票的最佳时机抽象一下就是找到一个子序列尾和首的差最大
+- 买卖股票的最佳时机抽象一下就是找到一个子序列尾和首的差最大(原数组两个元素的最大差等于求差数组的最大子序和！)
 - 要在第i天卖出获利最大，则要求第i-1天买入的价格最小
 dp[i] 表示以`i`为结尾的最大连续子数组和  
 最大利润=max{前一天最大利润, 今天的价格 - 之前最低价格}
+
+```cpp
+#include <algorithm>
+#include <cmath>
+#include <cstdlib>
+#include <iostream>
+#include <map>
+#include <string>
+#include <vector>
+
+using namespace std;
+class Solution
+{
+public:
+    int maxProfit(vector<int> &prices)
+    {
+        int len = prices.size();
+        if (len <= 1)
+            return 0;
+        vector<int> diff(len - 1);
+        // 计算出相邻两天股票的差值，如果差值为正，则说明是赚钱的
+        for (int i = 0; i < diff.size(); i++) {
+            diff[i] = prices[i + 1] - prices[i];
+        }
+
+        vector<int> dp(diff.size()); // dp[i] 表示以 i 为结尾的最大连续子数组和
+        dp[0] = max(0, diff[0]);
+        int profit = dp[0];
+
+        for (int i = 1; i < diff.size(); i++) {
+            dp[i] = max(0, dp[i - 1] + diff[i]);
+            profit = max(profit, dp[i]);
+        }
+        return profit;
+    }
+};
+
+int main(void)
+{
+    Solution s;
+    vector<int> prices = {7, 1, 5, 3, 6, 4};
+    cout << s.maxProfit(prices) << endl;
+
+    return 0;
+}
+```
 
 # 01背包问题(Knapsack Problem)
 有N个物品和一个最大容量为V的背包，第i件物品的空间`c[i]`，价值是`w[i]`。问那些物品装进背包可使价值总和最大？`每种物品最多选一次`
@@ -230,3 +298,5 @@ $$F[i,v] = max\{F[i-1, v], F[i-1, v-c_i]+ w_i\} $$
 | 编号 | 1   | 2   | 3   | 4   |
 | 体积 | 2   | 3   | 4   | 5   |
 | 价值 | 3   | 4   | 5   | 6   |
+
+# [凑零钱](https://leetcode-cn.com/problems/coin-change/)
