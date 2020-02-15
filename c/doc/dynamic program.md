@@ -10,7 +10,9 @@
 # 使用动态规划步骤
 1. 设定状态
 2. 寻找状态转移方程
-   > 为啥叫「状态转移方程」？为了听起来高端。你把 f(n)想做一个状态 n，这个状态 nn是由状态n−1 和状态n−2 相加转移而来，这就叫状态转移，仅此而已。
+   > 为啥叫「状态转移方程」？为了听起来高端。你把 f(n)想做一个状态 n，这个状态 n是由状态n−1 和状态n−2 相加转移而来，这就叫状态转移，仅此而已。
+
+   > 解动态规划的时候需要开一个数组，数组的每个元素f[i]或者f[i][j]代表什么
 
 作者：labuladong
 链接：https://leetcode-cn.com/problems/fibonacci-number/solution/dong-tai-gui-hua-tao-lu-xiang-jie-by-labuladong/
@@ -299,4 +301,71 @@ $$F[i,v] = max\{F[i-1, v], F[i-1, v-c_i]+ w_i\} $$
 | 体积 | 2   | 3   | 4   | 5   |
 | 价值 | 3   | 4   | 5   | 6   |
 
+# 凑零钱
+有三种硬币，分别面值２元，５元，７元，每枚硬币足够多。买一本书需要２７元，如何用最少的硬币组合付清
+
 # [凑零钱](https://leetcode-cn.com/problems/coin-change/)
+coins = [1, 2, 5], amount = 11
+
+
+
+```cpp
+vector<int> dp(amount + 1, amount + 1);
+```
+`f[x] = min{f[x-1] + 1, f[x-2] + 1, f[x-5] + 1};`
+
+| index | dp[] | 备注                                                        |
+| ----- | ---- | ----------------------------------------------------------- |
+| 0     | 0    |
+| 1     | 1    | min(dp[0] + 1, df[-1] + 1, dp[-4] + 1),df[-1], dp[-4]无意义 |
+| 2     | 1    | min(dp[1] + 1, df[0] + 1, dp[-３] + 1), df[-3] 无意义       |
+| 3     | ２   | min(dp[２] + 1, df[１] + 1, dp[-２] + 1), df[-2] 无意义     |
+| 4     | ２   | min(dp[３] + 1, df[２] + 1, dp[-1] + 1), df[-1] 无意义      |
+| 5     | 1    | min(dp[４] + 1, df[３] + 1, dp[0] + 1)                      |
+| 6     | ２   | min(dp[５] + 1, df[４] + 1, dp[1] + 1)                      |
+| 7     | 2    | min(dp[６] + 1, df[５] + 1, dp[2] + 1)                      |
+| 8     | 3    | min(dp[7] + 1, df[6] + 1, dp[3] + 1)                        |
+| 9     | 3    | min(dp[8] + 1, df[7] + 1, dp[4] + 1)                        |
+| 10    | 2    | min(dp[9] + 1, df[8] + 1, dp[5] + 1)                        |
+| 11    | 3    | min(dp[10] + 1, df[9] + 1, dp[6] + 1)                       |
+
+```cpp
+#include <algorithm>
+#include <iostream>
+#include <vector>
+
+using namespace std;
+class Solution
+{
+public:
+    int coinChange(vector<int> &coins, int amount)
+    {
+        // dp数组的大小由金额决定, 表示金额为ｉ的零钱，需要多少枚硬币
+        vector<int> dp(amount + 1, amount + 1);
+        dp[0] = 0;
+
+        for(int i = 1; i <= amount; i++)
+        {
+            /*
+             * f[x] = min{f[x-1] + 1, f[x-2] + 1, f[x-5] + 1};
+             * 依次算出f[x-1], f[x-2], f[x-5],和默认值比较，算出最小值
+             */
+            for(int coin : coins)
+            {
+                if(coin <= i)  //只有当可选钱币数额小于需要凑的零钱总数才有意义
+                    dp[i] = min(dp[i], dp[i - coin] + 1);
+            }
+        }
+        return dp[amount] > amount ? -1 : dp[amount];
+    }
+};
+
+int main(void)
+{
+    Solution    s;
+    vector<int> coins{1, 2, 5};
+    cout << s.coinChange(coins, 11) << endl;
+
+    return 0;
+}
+```
