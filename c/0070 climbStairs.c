@@ -28,18 +28,19 @@ https://leetcode-cn.com/problems/climbing-stairs/
 #include <stdlib.h>
 #include <string.h>
 
-int climbStairs(int n){
+int climbStairs(int n)
+{
     if(n < 0)
         return -1;
-    
-    int *res = malloc(sizeof(int)* (n+1));
-    res[0] = 1;
-    res[1] = 2;
-    for (size_t i = 2; i < n; i++)
+
+    int *dp = malloc(sizeof(int) * (n + 1));
+    dp[0]   = 1;
+    dp[1]   = 2;
+    for(size_t i = 2; i < n; i++)
     {
-        res[i] = res[i-1] + res[i-2];
+        dp[i] = dp[i - 1] + dp[i - 2];
     }
-    return res[n-1]; 
+    return dp[n - 1];
 }
 
 int main()

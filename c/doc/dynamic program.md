@@ -14,11 +14,8 @@
 
    > 解动态规划的时候需要开一个数组，数组的每个元素f[i]或者f[i][j]代表什么
 
-作者：labuladong
-链接：https://leetcode-cn.com/problems/fibonacci-number/solution/dong-tai-gui-hua-tao-lu-xiang-jie-by-labuladong/
-来源：力扣（LeetCode）
-著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
-1. 利用状态转移方程式自底向上求解问题
+
+3. 利用状态转移方程式自底向上求解问题
 
 
 # 斐波那契数列
@@ -49,8 +46,8 @@ int fib(int n)
 其实对于任何第N级台阶，都会出现这两种情况，即第N级的前一步是走了1级或者两级。
 所以如果我们统计F(10)的话，可以发现F(10) = F(9) + F(8)，即到第10级的走法等于到第9级的走法加上到第8级的走法。同理可得，F(9) = F(8) + F(7)，F(8) = F(7) + F(6)等等等等……
 
-所以我们就得到了动态规划步骤1中的所说的所谓的`状态转移方程：F(N) = F(N-1) + F(N-2)`.
-一直到最底层，当只有1级台阶时，F(1) = 1;当只有2级台阶时F(2) = 2.
+所以我们就得到了动态规划步骤1中的所说的所谓的`状态转移方程：`
+> `dp(N) = dp(N-1) + dp(N-2)`,　dp[i]表示到第ｉ阶台阶的方案数
 
 ## 代码
 ```c
@@ -58,18 +55,19 @@ int fib(int n)
 #include <stdlib.h>
 #include <string.h>
 
-int climbStairs(int n){
+int climbStairs(int n)
+{
     if(n < 0)
         return -1;
-    
-    int *res = malloc(sizeof(int)* (n+1));
-    res[0] = 1;
-    res[1] = 2;
-    for (size_t i = 2; i < n; i++)
+
+    int *dp = malloc(sizeof(int) * (n + 1));
+    dp[0]   = 1;
+    dp[1]   = 2;
+    for(size_t i = 2; i < n; i++)
     {
-        res[i] = res[i-1] + res[i-2];
+        dp[i] = dp[i - 1] + dp[i - 2];
     }
-    return res[n-1]; 
+    return dp[n - 1];
 }
 
 int main()
@@ -77,6 +75,66 @@ int main()
     printf("%d\n", climbStairs(3));
 }
 ```
+
+# [53. 最大子序和](https://leetcode-cn.com/problems/maximum-subarray/)
+## 题目
+给定一个整数数组 nums（[-2,1,-3,4,-1,2,1,-5,4]） ，找到一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和。
+
+## 分析
+dp[i] 表示nums中包含ｉ的前ｉ个元素的和。对于第ｉ个元素，有两种情况，如果前面i-1个元素的和为负数，只保留第ｉ个元素；否则，是当前数字与前面子序的和
+状态转移方程$max(0, dp[i-1]) + a[i]$
+
+| index | dp[] | Note                | nums |
+| ----- | ---- | ------------------- | ---- |
+| 0     | 0    | Placeholder         |
+| 1     | -2   | max(0, dp[0])+ a[1] | -2   |
+| 2     | 1    | max(0, dp[1])+ a[2] | 1    |
+| 3     | -2   | max(0, dp[2])+ a[3] | -3   |
+| 4     | 4    | max(0, dp[3])+ a[4] | 4    |
+| 5     | 3    | max(0, dp[4])+ a[5] | -1   |
+| 6     | 5    | max(0, dp[5])+ a[6] | 2    |
+| 7     | 6    | max(0, dp[6])+ a[7] | 1    |
+| 8     | 1    | max(0, dp[7])+ a[8] | -5   |
+| 9     | 5    | max(0, dp[8])+ a[9] | 4    |
+
+## 代码
+```cpp
+#include <algorithm>
+#include <iostream>
+#include <limits.h>
+#include <vector>
+
+using namespace std;
+class Solution
+{
+public:
+    int maxSubArray(vector<int> &nums)
+    {
+        //类似寻找最大最小值的题目，初始值一定要定义成理论上的最小最大值
+        int result = INT_MIN;
+        int numsSize = int(nums.size());
+        //dp[i]表示nums中以nums[i]结尾的最大子序和
+        vector<int> dp(numsSize);
+        dp[0] = nums[0];
+        result = dp[0];
+        for (int i = 1; i < numsSize; i++) {
+            dp[i] = max(dp[i - 1] + nums[i], nums[i]);
+            result = max(result, dp[i]);
+        }
+        return result;
+    }
+};
+
+int main(void)
+{
+    Solution s;
+    vector<int> nums{-2, 1, -3, 4, -1, 2, 1, -5, 4};
+    cout << s.maxSubArray(nums) << endl;
+
+    return 0;
+}
+```
+
 
 # [674. 最长连续递增数列（LIS）](https://leetcode-cn.com/problems/longest-continuous-increasing-subsequence/)
 给定一个未经排序的整数数组，找到最长且连续的的递增序列。返回连续递增数列的元素个数
