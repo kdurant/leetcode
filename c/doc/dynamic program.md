@@ -135,6 +135,68 @@ int main(void)
 }
 ```
 
+# [62. 不同路径](https://leetcode-cn.com/problems/unique-paths/)
+我们令 dp[i][j] 是到达 i, j 最多路径，状态转移方程：dp[i][j] = dp[i-1][j] + dp[i][j-1]
+
+坐标型动态规划
+
+```cpp
+#include <algorithm>
+#include <iostream>
+#include <vector>
+
+using namespace std;
+class Solution
+{
+public:
+    int uniquePaths(int m, int n)
+    {
+        // dp[m][n]表示到达(m,n)网格的路径方案
+        vector<vector<int>> dp(m, vector<int>(n, 0));
+        dp[0][0] = 1;
+        for(int i = 0; i < m; i++)
+        {
+            for(int j = 0; j < n; j++)
+            {
+                if(i == 0 || j == 0)
+                    dp[i][j] = 1;
+                else
+                    dp[i][j] = dp[i][j - 1] + dp[i - 1][j];
+            }
+        }
+        return dp[m - 1][n - 1];
+    }
+};
+
+int main(void)
+{
+    Solution s;
+    cout << s.uniquePaths(7, 3) << endl;
+
+    return 0;
+}
+```
+
+# [55. 跳跃游戏](https://leetcode-cn.com/problems/jump-game/)
+## 分析
+假设可以到达数组最后一个位置n-1
+- 从位置i到达，i < n-1
+- 最后一步不超过跳跃的最大距离不能超过当前位置允许的最大距离: i + a[i] >= n-1
+
+设：dp[i]表示能不能到达i位置
+状态方程:
+nums[i-1]+
+
+| index | dp[] | Note                | nums |
+| ----- | ---- | ------------------- | ---- |
+| 0     | true | Placeholder         | 2    |
+| 1     | -2   | max(0, dp[0])+ a[1] | 3    |
+| 2     | 1    | max(0, dp[1])+ a[2] | 1    |
+| 3     | -2   | max(0, dp[2])+ a[3] | 1    |
+| 4     | 4    | max(0, dp[3])+ a[4] | 4    |
+
+
+## 代码
 
 # [674. 最长连续递增数列（LIS）](https://leetcode-cn.com/problems/longest-continuous-increasing-subsequence/)
 给定一个未经排序的整数数组，找到最长且连续的的递增序列。返回连续递增数列的元素个数
@@ -184,57 +246,13 @@ int main(void)
 }
 ```
 
-# [53. 最大连续子序列和](https://leetcode-cn.com/problems/maximum-subarray/)
-给定一个整数数组 nums ，找到一个具有最大和的`连续子数组（子数组最少包含一个元素）`，返回其最大和。
-> 示例:
-> 输入: [-2,1,-3,4,-1,2,1,-5,4],
-> 输出: 6
-> 解释: 连续子数组 [4,-1,2,1] 的和最大，为 6。
-
-## 分析
-假如我们现在站在第i个元素上，如何通过`第i个元素的值`和`前面若干个元素的值`来找到最大子序和呢？
-
-假如我们现在有一个子序，它是最大子序的候选，我们就希望这个子序的后面是正数。
-假如我们是一个元素，前面有一个子序，我们就希望这个子序的和是正的。
-
-我们定义一个一个数组dp[], dp[i]表示`以第i个元素为结尾的一段最大子序和`。
-
-## 代码
-```c
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-
-int maxSubArray(int* nums, int numsSize){
-    int *dp = malloc(sizeof(int)*(numsSize +1));
-    dp[0] = nums[0];
-
-    int max = dp[0];
-    for (size_t i = 1; i < numsSize; i++)
-    {
-        if(dp[i-1] > 0)
-            dp[i] = dp[i-1] + nums[i];
-        else
-            dp[i] = nums[i];
-
-        if(dp[i] >= max)
-            max = dp[i];
-    }
-    return max;
-}
-
-int main()
-{
-    int A[] = {-2,1,-3,4,-1,2,1,-5,4};
-    printf("%d\n", maxSubArray(A, sizeof(A)/4));
-}
-```
-
 # [198. 打家劫舍](https://leetcode-cn.com/problems/house-robber/)
+## 题目
 你是一个专业的小偷，计划偷窃沿街的房屋。每间房内都藏有一定的现金，影响你偷窃的唯一制约因素就是相邻的房屋装有相互连通的防盗系统，如果两间相邻的房屋在同一晚上被小偷闯入，系统会自动报警。
 
 给定一个代表每个房屋存放金额的非负整数数组，计算你在不触动警报装置的情况下，能够偷窃到的最高金额。
 
+## 分析
 假如小偷站在第i家的屋顶，偷还是不偷？
 1. 如果偷这家，那前面的i-1家就不能偷，能偷到的的最大值就是i-2家的最大值加上这一家的钱
 2. 如果不偷，当前偷到的最大值就是偷完i-1家的最大值
@@ -242,6 +260,14 @@ int main()
 状态转移方程为: F(i) = max(F(i-2) + i, F(i-1))
 
 定义一个数组dp[], dp[i]表示小偷从第1号到第i+1号屋子偷钱的最大收益
+
+| index | dp[] | Note                      | nums |
+| ----- | ---- | ------------------------- | ---- |
+| 0     | 2    | init                      | 2    |
+| 1     | 7    | init                      | 7    |
+| 2     | 11   | max(dp[0]+nums[2], dp[1]) | 9    |
+| 3     | 11   | max(dp[1]+nums[3], dp[2]) | 3    |
+| 4     | 12   | max(dp[2]+nums[4], dp[3]) | 1    |
 
 ```c
 #include <stdio.h>
