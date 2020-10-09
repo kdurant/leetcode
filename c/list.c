@@ -215,6 +215,31 @@ struct ListNode* middleNode(struct ListNode* head)
 }
 
 /**
+ * @brief 判断链表中是否有环 https://leetcode-cn.com/problems/linked-list-cycle/
+ *
+ * @param head
+ * @return true
+ * @return false
+ */
+bool hasCycle(struct ListNode* head)
+{
+    if(head == NULL || head->next == NULL)
+        return false;
+    struct ListNode* fast = head->next;
+    struct ListNode* slow = head;
+
+    while(fast != slow)
+    {
+        if(fast == NULL || fast->next == NULL)
+            return false;
+
+        fast = fast->next;
+        slow = slow->next->next;
+    }
+    return true;
+}
+
+/**
  * @brief 遍历链表，打印链表节点
  *
  * @param head
