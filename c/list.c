@@ -253,6 +253,34 @@ void list_visit_r(struct ListNode* head)
     list_visit_r(head->next);
 }
 
+/**
+ * @brief 奇偶链表(https://leetcode-cn.com/problems/odd-even-linked-list/)
+ *
+ * @param head
+ *
+ * @return
+ */
+struct ListNode* oddEvenList(struct ListNode* head)
+{
+    head = head->next;
+    if(head == NULL || head->next == NULL)
+        return head;
+    struct ListNode* odd      = head;
+    struct ListNode* even     = odd->next;
+    struct ListNode* evenHead = head->next;
+
+    while(even != NULL && even->next != NULL)
+    {
+        odd->next  = odd->next->next;
+        even->next = even->next->next;
+        odd        = odd->next;
+        even       = odd->next;
+    }
+    odd->next = evenHead;
+
+    return head;
+}
+
 int main()
 {
     struct ListNode* l1;
@@ -260,11 +288,10 @@ int main()
     list_init(&l1);
     list_append(&l1, 1);
     list_append(&l1, 2);
-    list_append(&l1, 6);
     list_append(&l1, 3);
     list_append(&l1, 4);
     list_append(&l1, 5);
-    list_append(&l1, 6);
+    l1 = oddEvenList(l1);
     // struct ListNode* r = removeElements(l1->next, 6);
     // middleNode(l1);
 
@@ -281,5 +308,5 @@ int main()
     //     printf("%d\t", r->val);
     //     r = r->next;
     // }
-    list_visit_r(l1->next);
+    list_visit_r(l1);
 }
