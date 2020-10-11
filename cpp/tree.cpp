@@ -1,6 +1,7 @@
 #include <iostream>
 #include <queue>
 #include <vector>
+#include <algorithm>
 
 using namespace std;
 struct TreeNode
@@ -8,7 +9,8 @@ struct TreeNode
     int       val;
     TreeNode *left;
     TreeNode *right;
-    TreeNode(int x) : val(x), left(NULL), right(NULL)
+    TreeNode(int x)
+        : val(x), left(NULL), right(NULL)
     {
     }
 };
@@ -34,8 +36,8 @@ public:
 
             for(int i = 0; i < currentLevelSize; i++)
             {
-                auto node = q.front();  // 获得存放的节点内容
-                q.pop();  // 从queue中弹出节点
+                auto node = q.front();            // 获得存放的节点内容
+                q.pop();                          // 从queue中弹出节点
                 ret.back().push_back(node->val);  // 把node的值放到二维数组中
                 if(node->left)
                     q.push(node->left);
@@ -45,6 +47,20 @@ public:
             }
         }
         return ret;
+    }
+
+    /**
+     * @brief 二叉树的最大深度(https://leetcode-cn.com/problems/maximum-depth-of-binary-tree/)
+     * Max depth = max(l, r)+1;
+     * @param root
+     *
+     * @return
+     */
+    int maxDepth(TreeNode *root)
+    {
+        if(root == nullptr)
+            return 0;
+        return max(maxDepth(root->left), maxDepth(root->right)) + 1;
     }
 };
 
@@ -72,5 +88,6 @@ int main(void)
         cout << endl;
     }
 
+    cout << "The max depth of tree is: " << s.maxDepth(root) << endl;
     return 0;
 }
