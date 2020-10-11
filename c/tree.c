@@ -36,7 +36,7 @@ int find_node(struct TreeNode **T, int data)
 }
 
 /**
- * @brief 根 左 右
+ * @brief 前序遍历：根 左 右
  *
  * @param T
  */
@@ -45,7 +45,7 @@ void pre_order(struct TreeNode **T)
 }
 
 /**
- * @brief 左 根 右
+ * @brief 中序遍历：左 根 右
  *
  * @param T
  */
@@ -60,12 +60,28 @@ void mid_order(struct TreeNode *T)
 }
 
 /**
- * @brief 左 右 根
+ * @brief 后续遍历：左 右 根
  *
  * @param T
  */
 void post_order(struct TreeNode **T)
 {
+        if(T != NULL)
+    {
+        mid_order(T->left);
+        mid_order(T->right);
+        printf("%d\t", T->val);
+    }
+}
+
+/**
+ * @brief 广度优先遍历（BFS），层序遍历，按照高度顺序一层一层的访问整棵树，高层次的节点将会比低层次的节点先被访问到。
+ * 
+ * @param T 
+ */
+void level_order(struct TreeNode **T)
+{
+
 }
 
 /**

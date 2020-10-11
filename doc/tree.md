@@ -21,6 +21,7 @@
 ![](https://pic4.zhimg.com/80/v2-0e8c24776a03380a4db561d47f68847c_hd.jpg)
 
 (https://henleylee.github.io/posts/2019/f30c2ae3.html)
+
 # 二叉树
 二叉树是数据结构中一种重要的数据结构，也是树表家族最为`基础的结构`。
 ## 定义
