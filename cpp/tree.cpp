@@ -19,7 +19,7 @@ class TreeBinary
 {
 public:
     /**
-     * @brief 广度遍历（BFS）
+     * @brief 102. 二叉树的层序遍历(广度遍历BFS)(https://leetcode-cn.com/problems/binary-tree-level-order-traversal/)
      *
      * @param root
      *
@@ -69,6 +69,7 @@ public:
         if(root == nullptr)
             return 0;
         return max(maxDepth(root->left), maxDepth(root->right)) + 1;
+    }
 
     void inorder(TreeNode *root, vector<int> &res)
     {
@@ -79,6 +80,12 @@ public:
         res.push_back(root->val);
         inorder(root->right, res);
     }
+    /**
+     * @brief 94. 二叉树的中序遍历(https://leetcode-cn.com/problems/binary-tree-inorder-traversal/)
+     * 
+     * @param root 
+     * @return vector<int> 
+     */
     vector<int> inorderTraversal(TreeNode *root)
     {
         vector<int> res;
