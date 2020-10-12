@@ -13,9 +13,16 @@ struct TreeNode
     }
 };
 
-class Solution
+class TreeBinary
 {
 public:
+    /**
+     * @brief 广度遍历（BFS）
+     *
+     * @param root
+     *
+     * @return
+     */
     vector<vector<int>> levelOrder(TreeNode *root)
     {
         vector<vector<int>> ret;
@@ -34,8 +41,8 @@ public:
 
             for(int i = 0; i < currentLevelSize; i++)
             {
-                auto node = q.front();  // 获得存放的节点内容
-                q.pop();  // 从queue中弹出节点
+                auto node = q.front();            // 获得存放的节点内容
+                q.pop();                          // 从queue中弹出节点
                 ret.back().push_back(node->val);  // 把node的值放到二维数组中
                 if(node->left)
                     q.push(node->left);
@@ -45,6 +52,31 @@ public:
             }
         }
         return ret;
+    }
+
+    /**
+     * @brief 中序遍历
+     *
+     * @param root
+     *
+     * @return
+     */
+
+    void inorder(TreeNode *root, vector<int> &res)
+    {
+        if(!root)
+            return;
+
+        inorder(root->left, res);
+        res.push_back(root->val);
+        inorder(root->right, res);
+    }
+    vector<int> inorderTraversal(TreeNode *root)
+    {
+        vector<int> res;
+        inorder(root, res);
+
+        return res;
     }
 };
 
@@ -60,7 +92,7 @@ int main(void)
     root->right->left  = new TreeNode(125);
     root->right->right = new TreeNode(175);
 
-    Solution            s;
+    TreeBinary          s;
     vector<vector<int>> ret = s.levelOrder(root);
 
     for(int i = 0; i < ret.size(); i++)
