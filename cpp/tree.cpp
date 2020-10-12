@@ -81,7 +81,7 @@ public:
         inorder(root->right, res);
     }
     /**
-     * @brief 94. 二叉树的中序遍历(https://leetcode-cn.com/problems/binary-tree-inorder-traversal/)
+     * @brief 94.二叉树的中序遍历(https://leetcode-cn.com/problems/binary-tree-inorder-traversal/)
      * 
      * @param root 
      * @return vector<int> 
@@ -93,6 +93,31 @@ public:
 
         return res;
     }
+
+    /**
+     * @brief 110. 平衡二叉树(https://leetcode-cn.com/problems/balanced-binary-tree/)
+     *
+     * @param root
+     * @return
+     */
+    int helper(TreeNode *root)
+    {
+        if(!root)
+            return 0;
+
+        int left  = helper(root->left);
+        int right = helper(root->right);
+
+        if(left == -1 || right == -1 || abs(left - right) > 1)
+            return -1;
+
+        return 1 + max(left, right);
+    }
+    bool isBalanced(TreeNode *root)
+    {
+        return helper(root) != -1;
+    }
+
 };
 
 int main(void)
