@@ -15,9 +15,16 @@ struct TreeNode
     }
 };
 
-class Solution
+class TreeBinary
 {
 public:
+    /**
+     * @brief 广度遍历（BFS）
+     *
+     * @param root
+     *
+     * @return
+     */
     vector<vector<int>> levelOrder(TreeNode *root)
     {
         vector<vector<int>> ret;
@@ -50,10 +57,11 @@ public:
     }
 
     /**
-     * @brief 二叉树的最大深度(https://leetcode-cn.com/problems/maximum-depth-of-binary-tree/)
+     * @brief 104. 二叉树的最大深度(https://leetcode-cn.com/problems/maximum-depth-of-binary-tree/)
      * Max depth = max(l, r)+1;
+     * 
+     * @brief 中序遍历
      * @param root
-     *
      * @return
      */
     int maxDepth(TreeNode *root)
@@ -61,6 +69,22 @@ public:
         if(root == nullptr)
             return 0;
         return max(maxDepth(root->left), maxDepth(root->right)) + 1;
+
+    void inorder(TreeNode *root, vector<int> &res)
+    {
+        if(!root)
+            return;
+
+        inorder(root->left, res);
+        res.push_back(root->val);
+        inorder(root->right, res);
+    }
+    vector<int> inorderTraversal(TreeNode *root)
+    {
+        vector<int> res;
+        inorder(root, res);
+
+        return res;
     }
 };
 
@@ -76,7 +100,7 @@ int main(void)
     root->right->left  = new TreeNode(125);
     root->right->right = new TreeNode(175);
 
-    Solution            s;
+    TreeBinary          s;
     vector<vector<int>> ret = s.levelOrder(root);
 
     for(int i = 0; i < ret.size(); i++)
