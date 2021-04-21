@@ -45,43 +45,47 @@ nums 已按升序排列
 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
 */
 
-#include <stdio.h>
-#include <stdint.h>
-#include <stdlib.h>
-#include <string.h>
-#include <stdbool.h>
+#include <vector>
+#include <iostream>
+#include <string>
+#include <ctype.h>
+#include <unordered_map>
+#include <unordered_set>
 
-#include<limits.h>
+using namespace std;
 
-
-int removeDuplicates(int* nums, int numsSize) {
-    if(numsSize < 2)
-        return numsSize;
-
-    int s = 1;
-
-    for(size_t i = 1; i < numsSize; i++)
-    {
-        // s用来保存不同元素的位置, 找到一个新的不同元素后, 将新元素放到s的位置,然后s++
-        if (*(nums+i-1) != *(nums+i)) {
-            *(nums+s) = *(nums+i);
-            s++;
-        }
-    }
-    return s;
-}
-
-int main()
+class Solution
 {
-    int nums[] = {0,0,1,1,1,2,2,3,3,4};
-    // int nums[] = {0, 0, 0};
-    // int nums[] = {1, 1, 2};
-    int n = 0;
-    n = removeDuplicates(nums, sizeof(nums)/sizeof(int));
-    for(size_t i = 0; i < n; i++)
+public:
+    int removeDuplicates(vector<int>& nums)
     {
-        printf("%d ", nums[i]);
+        if(nums.size() < 1)
+            return nums.size();
+        int index = 1;
+        for(int i = 1; i < nums.size(); i++)
+        {
+            if(nums[i] != nums[i - 1])
+            {
+                nums[index] = nums[i];
+                index++;
+            }
+        }
+
+        return index;
     }
-    
+};
+
+int main(int argc, char* argv[])
+{
+    Solution s;
+    //vector<int> nums{0, 0, 1, 1, 1, 2, 2, 3, 3, 4};
+    vector<int> nums{0};
+
+    int len = s.removeDuplicates(nums);
+    for(int i = 0; i < len; i++)
+    {
+        cout << nums[i] << '\t';
+    }
     return 0;
 }
+
