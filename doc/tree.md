@@ -21,13 +21,14 @@
 ![](https://pic4.zhimg.com/80/v2-0e8c24776a03380a4db561d47f68847c_hd.jpg)
 
 (https://henleylee.github.io/posts/2019/f30c2ae3.html)
+
 # 二叉树
 二叉树是数据结构中一种重要的数据结构，也是树表家族最为`基础的结构`。
 ## 定义
 二叉树(Binary Tree)是一个有根树，并且每个节点最多只有2棵子树(即二叉树中不存在度大于2的结点)，并且二叉树的子树有左右之分，其次序不能任意颠倒。
 ![binary tree](https://henleylee.github.io/medias/study/data_structure_binary_tree.png)
 1. 二叉树的第n层`最多有`$2^{n-1}$个节点  
-2. 深度为i的二叉树`最多有`$2^{i-1}$个节点
+2. 深度为i的二叉树`最多有`$2^{i}-1$个节点
 3. 具有 n 个结点的完全二叉树的深度为$log2(n+1)$;
 
 # 满二叉树（Full Binary Tree）
@@ -50,11 +51,11 @@
 
 ## [遍历方式](https://juejin.im/post/5bf20e10e51d4503a53fd940)
 1. 前序遍历：当到达某个节点时，先输出该节点，再访问左子节点，最后访问右子节点。
-   ![](https://user-gold-cdn.xitu.io/2018/11/19/1672986e90745927?imageslim)
+   ![pre_order](https://s3.51cto.com/images/blog/202101/21/6153c840736b7884a1d2556691ef9991.gif)
 2. 中序遍历：当到达某个节点时，先访问左子节点，再输出该节点，最后访问右子节点。
-   ![](https://upload-images.jianshu.io/upload_images/1940317-51cb2fc5f97df92d.gif?imageMogr2/auto-orient/strip|imageView2/2/w/951/format/webp)
+   ![mid_order](https://upload-images.jianshu.io/upload_images/1940317-51cb2fc5f97df92d.gif?imageMogr2/auto-orient/strip|imageView2/2/w/951/format/webp)
 3. 后序遍历：当到达某个节点时，先访问左子节点，再访问右子节点，最后输出该节点。
-   ![](https://upload-images.jianshu.io/upload_images/1940317-37d0ee8c681d55fe.gif?imageMogr2/auto-orient/strip|imageView2/2/w/951/format/webp)
+   ![post_order](https://upload-images.jianshu.io/upload_images/1940317-37d0ee8c681d55fe.gif?imageMogr2/auto-orient/strip|imageView2/2/w/951/format/webp)
 
 4. 广度优先
    层序，横向访问
