@@ -24,3 +24,5 @@ test.*
 *.lib
 *.exp
 *.pdb
+
+build
