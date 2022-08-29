@@ -26,3 +26,4 @@ test.*
 
 build
 bin
+.cache

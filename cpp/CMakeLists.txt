@@ -12,3 +12,4 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
 
 add_executable(0001_twoNum ./0001_twoNum.cpp)
 add_executable(0015_threeSum ./0015_threeSum.cpp)
+add_executable(1470_shuffle ./1470_shuffle.cpp)
