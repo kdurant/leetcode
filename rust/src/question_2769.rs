@@ -30,10 +30,32 @@
 1 <= num, t <= 50
  */
 
+#![allow(dead_code)]
+
 pub struct Solution;
 impl Solution {
-    // x 相当于返回值
     pub fn the_maximum_achievable_x(num: i32, t: i32) -> i32 {
         num + 2 * t
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_the_maximum_achievable_x() {
+        // 示例 1：num = 4, t = 1, 期望输出 6
+        assert_eq!(Solution::the_maximum_achievable_x(4, 1), 6);
+
+        // 示例 2：num = 3, t = 2, 期望输出 7
+        assert_eq!(Solution::the_maximum_achievable_x(3, 2), 7);
+
+        // 边界情况：t = 0
+        assert_eq!(Solution::the_maximum_achievable_x(5, 0), 5);
+
+        // 其他测试用例
+        assert_eq!(Solution::the_maximum_achievable_x(1, 1), 3);
+        assert_eq!(Solution::the_maximum_achievable_x(10, 5), 20);
     }
 }

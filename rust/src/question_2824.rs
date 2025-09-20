@@ -34,14 +34,14 @@
 -50 <= nums[i], target <= 50
  */
 
-use std::{num, vec};
-
+#![allow(dead_code)]
 pub struct Solution;
 impl Solution {
     pub fn count_pairs(nums: Vec<i32>, target: i32) -> i32 {
         let mut ans: i32 = 0;
         for i in 0..nums.len() {
-            for j in 1..nums.len() {
+            for j in (i + 1)..nums.len() {
+                // 修正：j 应该从 i+1 开始，确保 i < j
                 if nums[i] + nums[j] < target {
                     ans = ans + 1
                 }
@@ -49,5 +49,41 @@ impl Solution {
         }
 
         return ans;
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_count_pairs() {
+        // 示例 1：nums = [-1,1,2,3,1], target = 2, 期望输出 3
+        let nums1 = vec![-1, 1, 2, 3, 1];
+        assert_eq!(Solution::count_pairs(nums1, 2), 3);
+
+        // 示例 2：nums = [-6,2,5,-2,-7,-1,3], target = -2, 期望输出 10
+        let nums2 = vec![-6, 2, 5, -2, -7, -1, 3];
+        assert_eq!(Solution::count_pairs(nums2, -2), 10);
+
+        // 边界情况：单个元素
+        let nums3 = vec![1];
+        assert_eq!(Solution::count_pairs(nums3, 5), 0);
+
+        // 边界情况：两个元素，满足条件
+        let nums4 = vec![1, 2];
+        assert_eq!(Solution::count_pairs(nums4, 4), 1);
+
+        // 边界情况：两个元素，不满足条件
+        let nums5 = vec![1, 2];
+        assert_eq!(Solution::count_pairs(nums5, 3), 0);
+
+        // 测试用例：所有对都满足条件
+        let nums6 = vec![1, 1, 1];
+        assert_eq!(Solution::count_pairs(nums6, 3), 3);
+
+        // 测试用例：没有对满足条件
+        let nums7 = vec![5, 5, 5];
+        assert_eq!(Solution::count_pairs(nums7, 5), 0);
     }
 }
