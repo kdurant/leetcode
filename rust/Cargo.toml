@@ -6,3 +6,15 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
+
+# 用于在一个rust项目中定义多个可执行的二进制文件
+# [[bin]]
+# name = "enum"
+# path = "src/enum.rs"
+
+# [[bin]]
+# name = "result"
+# path = "src/result.rs"
+
+# 2. 放到examples目录下，使用cargo run --example result运行。cargo build不编译
+# 3. 放到src/bin目录下，使用cargo run --bin result运行

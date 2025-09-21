@@ -21,3 +21,6 @@ Rust 编译器会检测以下情况并发出 dead_code 警告：
 
 ##  #![allow(dead_code)] 
 应用于整个模块/文件，必须放在文件/模块的顶部
+
+# #[derive(Debug)] 
+自动为结构体或枚举生成 Debug trait 的实现，让类型可以使用调试格式化输出。
